@@ -1,0 +1,29 @@
+<div class="layout-container">
+  <aside class="sidebar">
+    <h2 class="sidebar__logo">Driving School</h2>
+
+    <nav class="sidebar__nav">
+      <a routerLink="/dashboard" routerLinkActive="active">لوحة التحكم</a>
+      <a routerLink="/instructors" routerLinkActive="active">المدرّسين</a>
+      <a routerLink="/trainees" routerLinkActive="active">المتدربين</a>
+      <a routerLink="/centers" routerLinkActive="active">المراكز</a>
+      <a routerLink="/profile" routerLinkActive="active">البروفايل</a>
+    </nav>
+
+    <button class="sidebar__logout" type="button">تسجيل الخروج</button>
+  </aside>
+  
+  <div class="main-content">
+
+    <header class="navbar">
+      <div class="navbar__avatar">👤</div>
+      <span class="navbar__username">مرحباً، المستخدم</span>
+    </header>
+
+    <main class="page-content">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+
+</div>
