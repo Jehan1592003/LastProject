@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
 import { User } from '../models/user.model';
 import { MOCK_USERS } from '../config/mock-data.config';
-import { O } from '@angular/cdk/keycodes';
 
 @Injectable({
   providedIn: 'root'

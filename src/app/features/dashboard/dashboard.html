@@ -1,1 +1,43 @@
-<p>dashboard works!</p>
+@if (stats$ | async; as stats) {
+  <section class="dashboard-stats">
+    <div class="stat-card">
+      <span class="stat-number">{{ stats.totalInstructors }}</span>
+      <span class="stat-label">مدرّس</span>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-number">{{ stats.totalTrainees }}</span>
+      <span class="stat-label">متدرب</span>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-number">{{ stats.totalCenters }}</span>
+      <span class="stat-label">مركز</span>
+    </div>
+  </section>
+}
+<section class="recent-trainees">
+  <h3>آخر المتدربين</h3>
+  @if (recentTrainees$ | async; as trainees) {
+    @for (trainee of trainees; track trainee.id) {
+      <div class="trainee-row">
+         <p>{{trainee.name}}</p>
+        <p>{{trainee.status}}</p>
+        <p>{{trainee.enrollDate}}</p>
+
+      </div>
+    }
+  }
+</section>
+<section class="recent-instructor">
+  <h3>آخر المدرسين</h3>
+  @if (recentInstructors$ | async; as instructors) {
+    @for (instructor of instructors; track instructor.id) {
+      <div class="instructor-row">
+        <p>{{instructor.name}}</p>
+        <p>{{instructor.status}}</p>
+        <p>{{instructor.hireDate}}</p>
+      </div>
+    }
+  }
+</section>

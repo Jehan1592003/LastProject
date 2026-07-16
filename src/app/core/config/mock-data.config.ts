@@ -3,7 +3,6 @@ import { Instructor } from '../models/instructor.model';
 import { Trainee } from '../models/trainee.model';
 import { User } from '../models/user.model';
 
-// ===== CENTERS =====
 export const MOCK_CENTERS: Center[] = [
   {
     id: 1,
@@ -56,8 +55,6 @@ export const MOCK_CENTERS: Center[] = [
     status: 'active'
   }
 ];
-
-// ===== INSTRUCTORS =====
 export const MOCK_INSTRUCTORS: Instructor[] = [
   {
     id: 1,
@@ -170,8 +167,6 @@ export const MOCK_INSTRUCTORS: Instructor[] = [
     traineeCount: 0
   }
 ];
-
-// ===== TRAINEES =====
 export const MOCK_TRAINEES: Trainee[] = [
   {
     id: 1,
@@ -330,8 +325,6 @@ export const MOCK_TRAINEES: Trainee[] = [
     status: 'passed'
   }
 ];
-
-// ===== USERS =====
 export const MOCK_USERS: User[] = [
   {
     id: 1,
@@ -358,8 +351,6 @@ export const MOCK_USERS: User[] = [
     email: 'staff2@drive.sa'
   }
 ];
-
-// ===== traineeCount ديناميكي =====
 MOCK_INSTRUCTORS.forEach(instructor => {
   instructor.traineeCount = MOCK_TRAINEES.filter(
     t => t.instructorId === instructor.id

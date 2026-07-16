@@ -1,1 +1,58 @@
-<p>landing works!</p>
+<div class="landing-page">
+  <header>
+    <nav>
+      <span>Driving School</span>
+      <a routerLink="/login">سجل دخول</a>
+    </nav>
+  </header>
+
+  <section class="hero-container">
+    <h1>تعلّم القيادة بثقة مع أفضل المدرّسين</h1>
+    <p>
+      منصة متكاملة لإدارة مدرسة السياقة — تابعي تقدمك،
+      احجزي حصصك، وتواصلي مع مدرّسينك بكل سهولة
+    </p>
+    <a class="cta-button" routerLink="/login">ابدأ الآن</a>
+  </section>
+  <section class="stats-section">
+  <div class="stat-card">
+    <span class="stat-number">{{ totalCenters }}</span>
+    <span class="stat-label">مركز</span>
+  </div>
+  
+  <div class="stat-card">
+    <span class="stat-number">{{ totalInstructors }}</span>
+    <span class="stat-label">مدرّس</span>
+  </div>
+  
+  <div class="stat-card">
+    <span class="stat-number">{{ totalTrainees }}</span>
+    <span class="stat-label">متدرب</span>
+  </div>
+</section>
+<section class="features-section">
+    <div class="feature-card">
+      <span class="feature-icon">📅</span>
+      <h3>حجز حصص سهل</h3>
+      <p>احجزي حصص القيادة بضغطة زر
+        ، وتابعي مواعيدك بكل وضوح.</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">📈</span>
+      <h3>متابعة التقدم</h3>
+      <p>راقبي عدد الحصص المكتملة ونسبة تقدمك أول بأول.</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🎓</span>
+      <h3>مدرّسون محترفون</h3>
+      <p>فريق من المدرّسين المرخّصين والمعتمدين لضمان تعلّم آمن وسليم.</p>
+    </div>
+  </section>
+
+  <footer class="landing-footer">
+    <p>Driving School — منصة إدارة مدارس السياقة</p>
+    <p>📞 00962-000-000 | ✉️ info@drivingschool.com</p>
+  </footer>
+</div>
