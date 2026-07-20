@@ -1,20 +1,42 @@
-@if (errorMessage) {
-  <span class="error">{{ errorMessage }}</span>
-}
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <label for="username">اسم المستخدم</label>
-  <input  id="username" formControlName="username" />
- @if (loginForm.get('username')?.errors?.['required'] && loginForm.get('username')?.touched)  {
-  <span class="error">اسم المستخدم مطلوب</span>
-  }
-  <label for="password">كلمة السر</label>
-  <input type="password" id="password" formControlName="password" />
- @if (loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched) {
-  <span class="error">كلمة السر مطلوبة</span>
-}
-@if (loginForm.get('password')?.errors?.['minlength'] && loginForm.get('password')?.touched) {
-  <span class="error">كلمة السر يجب أن تحتوي على الأقل 6 أحرف</span>
-}
+<div class="min-h-screen bg-bg-subtle flex items-center justify-center px-4">
+  <div class="w-full max-w-[400px] bg-white rounded-xl shadow-sm p-8">
 
-  <button type="submit">دخول</button>
-</form>
+    <h1 class="text-2xl font-bold text-text-heading text-center mb-6">تسجيل الدخول</h1>
+
+    @if (errorMessage) {
+      <div class="bg-error-light text-error-dark text-sm rounded-lg py-2 px-3 mb-4 text-center">
+        {{ errorMessage }}
+      </div>
+    }
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+
+      <div>
+        <label for="username" class="block text-sm font-medium text-text-body mb-1">اسم المستخدم</label>
+        <input id="username" formControlName="username"
+          class="w-full h-10 px-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+        @if (loginForm.get('username')?.errors?.['required'] && loginForm.get('username')?.touched) {
+          <span class="text-error-dark text-xs mt-1 block">اسم المستخدم مطلوب</span>
+        }
+      </div>
+
+      <div>
+        <label for="password" class="block text-sm font-medium text-text-body mb-1">كلمة السر</label>
+        <input type="password" id="password" formControlName="password"
+          class="w-full h-10 px-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+        @if (loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched) {
+          <span class="text-error-dark text-xs mt-1 block">كلمة السر مطلوبة</span>
+        }
+        @if (loginForm.get('password')?.errors?.['minlength'] && loginForm.get('password')?.touched) {
+          <span class="text-error-dark text-xs mt-1 block">كلمة السر يجب أن تحتوي على الأقل 6 أحرف</span>
+        }
+      </div>
+
+      <button type="submit"
+        class="w-full h-10 bg-primary text-white rounded-lg font-medium hover:bg-primary-hover transition mt-2">
+        دخول
+      </button>
+
+    </form>
+  </div>
+</div>

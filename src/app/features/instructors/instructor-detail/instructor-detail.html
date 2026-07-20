@@ -1,1 +1,39 @@
-<p>instructor-detail works!</p>
+<form [formGroup]="instructorForm" (ngSubmit)="onSubmit()" >
+  
+  <label for="name">الاسم</label>
+  <input id="name" formControlName="name" />
+  @if (instructorForm.get('name')?.errors?.['required'] && instructorForm.get('name')?.touched) {
+    <span class="error">الاسم مطلوب</span>
+  }
+
+  <label for="email">البريد الإلكتروني</label>
+  <input id="email" formControlName="email" />
+  @if (instructorForm.get('email')?.errors?.['required'] && instructorForm.get('email')?.touched) {
+    <span class="error">البريد الإلكتروني مطلوب</span>
+  }
+  <label for="phone">رقم الهاتف</label>
+  <input id="phone" formControlName="phone" />
+  @if (instructorForm.get('phone')?.errors?.['required'] && instructorForm.get('phone')?.touched) {
+    <span class="error">رقم الهاتف مطلوب</span>
+  } @if (instructorForm.get('phone')?.errors?.['pattern']) {
+    <span class="error">رقم الهاتف يجب ان يحتوي على ارقام و....</span>
+  }
+  <label for="licenseNumber">رقم الرخصة</label>
+  <input id="licenseNumber" formControlName="licenseNumber" />
+  @if (instructorForm.get('licenseNumber')?.errors?.['required'] && instructorForm.get('licenseNumber')?.touched) {
+    <span class="error">رقم الرخصة مطلوب </span>
+  }
+  <label for="status">الحالة</label>
+  <select id="status" formControlName="status">
+   <option value="active">نشط</option>
+   <option value="inactive">غير نشط</option>
+  </select>
+  <label for="centerId">رقم المركز</label>
+<select id="centerId" formControlName="centerId">
+  @for (center of centers; track center.id) {
+    <option [value]="center.id">{{ center.name }}</option>
+  }
+</select>
+
+  <button type="submit">حفظ</button>
+</form>

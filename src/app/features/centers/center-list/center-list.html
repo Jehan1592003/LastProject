@@ -1,1 +1,14 @@
-<p>center-list works!</p>
+<section class="centers-grid">
+  @for (center of centersWithCounts; track center.id) {
+    <div class="center-card">
+      <h3>{{ center.name }}</h3>
+      <p>{{ center.city }}</p>
+      <span class="badge">{{ center.status }}</span>
+      
+      <div class="center-stats">
+        <span>👨‍🏫 {{ center.instructorCount }} مدرّس</span>
+        <span>🎓 {{ center.traineeCount }} متدرب</span>
+      </div>
+    </div>
+  }
+</section>

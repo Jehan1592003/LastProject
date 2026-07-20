@@ -1,23 +1,30 @@
-<div class="layout-container">
-  <aside class="sidebar">
+<div class="layout-container flex">
+  <aside class="sidebar w-[240px] h-screen bg-primary-dark text-white flex flex-col p-4">
     <h2 class="sidebar__logo">Driving School</h2>
 
-    <nav class="sidebar__nav">
-      <a routerLink="/dashboard" routerLinkActive="active">لوحة التحكم</a>
-      <a routerLink="/instructors" routerLinkActive="active">المدرّسين</a>
-      <a routerLink="/trainees" routerLinkActive="active">المتدربين</a>
-      <a routerLink="/centers" routerLinkActive="active">المراكز</a>
-      <a routerLink="/profile" routerLinkActive="active">البروفايل</a>
+    <nav class="sidebar__nav flex flex-col gap-1">
+      <a routerLink="/dashboard" routerLinkActive="active"
+      class="text-white no-underline py-2 px-3 rounded-lg hover:bg-primary-light hover:text-primary transition">لوحة التحكم</a>
+      <a routerLink="/instructors" routerLinkActive="active"
+      class="text-white no-underline py-2 px-3 rounded-lg hover:bg-primary-light hover:text-primary transition">المدرّسين</a>
+      <a routerLink="/trainees" routerLinkActive="active"
+      class="text-white no-underline py-2 px-3 rounded-lg hover:bg-primary-light hover:text-primary transition">المتدربين</a>
+      <a routerLink="/centers" routerLinkActive="active"
+      class="text-white no-underline py-2 px-3 rounded-lg hover:bg-primary-light hover:text-primary transition">المراكز</a>
+      <a routerLink="/profile" routerLinkActive="active"
+      class="text-white no-underline py-2 px-3 rounded-lg hover:bg-primary-light hover:text-primary transition">البروفايل</a>
     </nav>
 
-    <button class="sidebar__logout" type="button">تسجيل الخروج</button>
+   <button class="sidebar__logout w-full py-2 px-3 rounded-lg bg-white text-primary-dark hover:bg-primary-light transition mt-4" type="button">
+     تسجيل الخروج
+   </button>
   </aside>
-  
-  <div class="main-content">
 
-    <header class="navbar">
-      <div class="navbar__avatar">👤</div>
-      <span class="navbar__username">مرحباً، المستخدم</span>
+  <div class="main-content flex-1">
+
+    <header class="navbar h-[64px] bg-white shadow flex items-center gap-3 px-6">
+      <div class="navbar__avatar w-10 h-10 rounded-full bg-primary-light flex items-center justify-center">👤</div>
+      <span class="navbar__username text-text-body">مرحباً، المستخدم</span>
     </header>
 
     <main class="page-content">

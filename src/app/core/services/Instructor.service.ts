@@ -29,19 +29,18 @@ export class InstructorService {
         MOCK_INSTRUCTORS.push(newInstructor);
         return of(newInstructor).pipe(delay(600));
     }
-    update(id:number,instructorData:Partial<Omit<Instructor, 'id'> >):Observable<Instructor>{
-        const index=MOCK_INSTRUCTORS.findIndex(instructor=>instructor.id===id);
-        if(index===-1){
-            return throwError(() => new Error('المدرب غير موجود'));
-        }else{
-            MOCK_INSTRUCTORS[index]={
-                ...MOCK_INSTRUCTORS[index],
-                ...instructorData
-            }
-            return of(MOCK_INSTRUCTORS[index]).pipe(delay(600));
-        }
-
-    }
+   update(id: number, instructorData: Partial<Omit<Instructor, 'id'>>): Observable<Instructor> {
+  const index = MOCK_INSTRUCTORS.findIndex(instructor => instructor.id === id);
+  if (index === -1) {
+    return throwError(() => new Error('المدرب غير موجود'));
+  } else {
+    MOCK_INSTRUCTORS[index] = {
+      ...MOCK_INSTRUCTORS[index],
+      ...instructorData
+    };
+    return of(MOCK_INSTRUCTORS[index]).pipe(delay(600));
+  }
+}
     delete(id:number):Observable<void>{
         const index=MOCK_INSTRUCTORS.findIndex(instructor=>instructor.id===id);
         if(index===-1){

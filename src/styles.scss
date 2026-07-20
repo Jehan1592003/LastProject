@@ -1,13 +1,37 @@
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
 @layer theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
+
+@theme {
+  --color-primary-dark: #1E3A5F;
+  --color-primary: #2563EB;
+  --color-primary-hover: #1D4ED8;
+  --color-primary-light: #DBEAFE;
+  --color-primary-pale: #EFF6FF;
+
+ 
+  --color-text-heading: #111827;
+  --color-text-body: #374151;
+  --color-text-muted: #6B7280;
+  --color-border: #D1D5DB;
+  --color-bg-subtle: #F9FAFB;
+
+
+  --color-success-light: #D1FAE5;
+  --color-success-dark: #059669;
+  --color-warning-light: #FEF3C7;
+  --color-warning-dark: #D97706;
+  --color-error-light: #FEE2E2;
+  --color-error-dark: #DC2626;
+  --color-info-light: #DBEAFE;
+  --color-info-dark: #0369A1;
+
+   --font-arabic: 'Tajawal', sans-serif;
+  --font-english: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
 
 html {
   height: 100%;
@@ -24,20 +48,10 @@ html {
 }
 
 body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
   color-scheme: light;
-
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
   background-color: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-medium);
-
-  // Reset the user agent margin.
   margin: 0;
   height: 100%;
 }
-/* You can add global styles to this file, and also import other style files */
