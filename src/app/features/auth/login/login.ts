@@ -11,6 +11,7 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class Login {
   errorMessage = '';
+  showPassword = false;
   constructor(
     private router:Router,
     private authService:AuthService
@@ -32,5 +33,8 @@ export class Login {
 
     }
   }
+  togglePasswordVisibility(): void {
+  this.showPassword = !this.showPassword;
+}
 
 }

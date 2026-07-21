@@ -1,1 +1,69 @@
-<p>trainee-detail works!</p>
+<form [formGroup]="traineeForm" (ngSubmit)="onSubmit()" class="max-w-2xl mx-auto bg-white border border-border rounded-xl p-8 flex flex-col gap-4">
+
+  <div>
+    <label for="name" class="block text-sm font-medium text-text-body mb-1.5">الاسم</label>
+    <input id="name" formControlName="name" placeholder="أحمد محمد"
+           class="w-full h-10 px-3 border border-border rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200" />
+    @if (traineeForm.get('name')?.errors?.['required'] && traineeForm.get('name')?.touched) {
+      <span class="block mt-1 text-xs text-error-dark">الاسم مطلوب</span>
+    }
+  </div>
+
+  <div>
+    <label for="email" class="block text-sm font-medium text-text-body mb-1.5">البريد الإلكتروني</label>
+    <input id="email" formControlName="email" placeholder="example@email.com"
+           class="w-full h-10 px-3 border border-border rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200" />
+    @if (traineeForm.get('email')?.errors?.['required'] && traineeForm.get('email')?.touched) {
+      <span class="block mt-1 text-xs text-error-dark">البريد الإلكتروني مطلوب</span>
+    }
+  </div>
+
+  <div>
+    <label for="phone" class="block text-sm font-medium text-text-body mb-1.5">رقم الهاتف</label>
+    <input id="phone" formControlName="phone" placeholder="05xxxxxxxx"
+           class="w-full h-10 px-3 border border-border rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200" />
+    @if (traineeForm.get('phone')?.errors?.['required'] && traineeForm.get('phone')?.touched) {
+      <span class="block mt-1 text-xs text-error-dark">رقم الهاتف مطلوب</span>
+    }
+    @if (traineeForm.get('phone')?.errors?.['pattern']) {
+      <span class="block mt-1 text-xs text-error-dark">رقم الهاتف يجب أن يتكون من 10 أرقام</span>
+    }
+  </div>
+
+  <div>
+    <label for="nationalId" class="block text-sm font-medium text-text-body mb-1.5">رقم </label>
+    <input id="nationalId" formControlName="nationalId" placeholder="DL-2024-001"
+           class="w-full h-10 px-3 border border-border rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200" />
+    @if (traineeForm.get('licenseNumber')?.errors?.['required'] && traineeForm.get('licenseNumber')?.touched) {
+      <span class="block mt-1 text-xs text-error-dark">رقم الرخصة مطلوب</span>
+    } @if (traineeForm.get('nationalId')?.errors?.['pattern']) {
+      <span class="block mt-1 text-xs text-error-dark">رقم  يجب أن يتكون من 9 أرقام</span>
+    }
+  </div>
+
+  <div>
+    <label for="status" class="block text-sm font-medium text-text-body mb-1.5">الحالة</label>
+    <select id="status" formControlName="status"
+            class="w-full h-10 px-3 border border-border rounded-lg text-right bg-white focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200">
+      <option value="enrolled">نشط</option>
+      <option value="passed">ناجح</option>
+      <option value="failed">راسب</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="centerId" class="block text-sm font-medium text-text-body mb-1.5">رقم المركز</label>
+    <select id="centerId" formControlName="centerId"
+            class="w-full h-10 px-3 border border-border rounded-lg text-right bg-white focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200">
+      @for (center of centers; track center.id) {
+        <option [value]="center.id">{{ center.name }}</option>
+      }
+    </select>
+  </div>
+
+  <button type="submit"
+          class="w-full h-10 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors duration-200 mt-2">
+    حفظ
+  </button>
+
+</form>

@@ -1,39 +1,66 @@
-<form [formGroup]="instructorForm" (ngSubmit)="onSubmit()" >
-  
-  <label for="name">الاسم</label>
-  <input id="name" formControlName="name" />
-  @if (instructorForm.get('name')?.errors?.['required'] && instructorForm.get('name')?.touched) {
-    <span class="error">الاسم مطلوب</span>
-  }
+<form [formGroup]="instructorForm" (ngSubmit)="onSubmit()" class="max-w-2xl mx-auto bg-white border border-border rounded-xl p-8 flex flex-col gap-4">
 
-  <label for="email">البريد الإلكتروني</label>
-  <input id="email" formControlName="email" />
-  @if (instructorForm.get('email')?.errors?.['required'] && instructorForm.get('email')?.touched) {
-    <span class="error">البريد الإلكتروني مطلوب</span>
-  }
-  <label for="phone">رقم الهاتف</label>
-  <input id="phone" formControlName="phone" />
-  @if (instructorForm.get('phone')?.errors?.['required'] && instructorForm.get('phone')?.touched) {
-    <span class="error">رقم الهاتف مطلوب</span>
-  } @if (instructorForm.get('phone')?.errors?.['pattern']) {
-    <span class="error">رقم الهاتف يجب ان يحتوي على ارقام و....</span>
-  }
-  <label for="licenseNumber">رقم الرخصة</label>
-  <input id="licenseNumber" formControlName="licenseNumber" />
-  @if (instructorForm.get('licenseNumber')?.errors?.['required'] && instructorForm.get('licenseNumber')?.touched) {
-    <span class="error">رقم الرخصة مطلوب </span>
-  }
-  <label for="status">الحالة</label>
-  <select id="status" formControlName="status">
-   <option value="active">نشط</option>
-   <option value="inactive">غير نشط</option>
-  </select>
-  <label for="centerId">رقم المركز</label>
-<select id="centerId" formControlName="centerId">
-  @for (center of centers; track center.id) {
-    <option [value]="center.id">{{ center.name }}</option>
-  }
-</select>
+  <div>
+    <label for="name" class="block text-sm font-medium text-text-body mb-1.5">الاسم</label>
+    <input id="name" formControlName="name" placeholder="أحمد محمد"
+           class="w-full h-10 px-3 border border-border rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200" />
+    @if (instructorForm.get('name')?.errors?.['required'] && instructorForm.get('name')?.touched) {
+      <span class="block mt-1 text-xs text-error-dark">الاسم مطلوب</span>
+    }
+  </div>
 
-  <button type="submit">حفظ</button>
+  <div>
+    <label for="email" class="block text-sm font-medium text-text-body mb-1.5">البريد الإلكتروني</label>
+    <input id="email" formControlName="email" placeholder="example@email.com"
+           class="w-full h-10 px-3 border border-border rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200" />
+    @if (instructorForm.get('email')?.errors?.['required'] && instructorForm.get('email')?.touched) {
+      <span class="block mt-1 text-xs text-error-dark">البريد الإلكتروني مطلوب</span>
+    }
+  </div>
+
+  <div>
+    <label for="phone" class="block text-sm font-medium text-text-body mb-1.5">رقم الهاتف</label>
+    <input id="phone" formControlName="phone" placeholder="05xxxxxxxx"
+           class="w-full h-10 px-3 border border-border rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200" />
+    @if (instructorForm.get('phone')?.errors?.['required'] && instructorForm.get('phone')?.touched) {
+      <span class="block mt-1 text-xs text-error-dark">رقم الهاتف مطلوب</span>
+    }
+    @if (instructorForm.get('phone')?.errors?.['pattern']) {
+      <span class="block mt-1 text-xs text-error-dark">رقم الهاتف يجب أن يتكون من 10 أرقام</span>
+    }
+  </div>
+
+  <div>
+    <label for="licenseNumber" class="block text-sm font-medium text-text-body mb-1.5">رقم الرخصة</label>
+    <input id="licenseNumber" formControlName="licenseNumber" placeholder="DL-2024-001"
+           class="w-full h-10 px-3 border border-border rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200" />
+    @if (instructorForm.get('licenseNumber')?.errors?.['required'] && instructorForm.get('licenseNumber')?.touched) {
+      <span class="block mt-1 text-xs text-error-dark">رقم الرخصة مطلوب</span>
+    }
+  </div>
+
+  <div>
+    <label for="status" class="block text-sm font-medium text-text-body mb-1.5">الحالة</label>
+    <select id="status" formControlName="status"
+            class="w-full h-10 px-3 border border-border rounded-lg text-right bg-white focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200">
+      <option value="active">نشط</option>
+      <option value="inactive">غير نشط</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="centerId" class="block text-sm font-medium text-text-body mb-1.5">رقم المركز</label>
+    <select id="centerId" formControlName="centerId"
+            class="w-full h-10 px-3 border border-border rounded-lg text-right bg-white focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200">
+      @for (center of centers; track center.id) {
+        <option [value]="center.id">{{ center.name }}</option>
+      }
+    </select>
+  </div>
+
+  <button type="submit"
+          class="w-full h-10 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors duration-200 mt-2">
+    حفظ
+  </button>
+
 </form>

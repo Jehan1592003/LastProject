@@ -29,17 +29,22 @@ export class InstructorDetail implements OnInit {
     status: new FormControl('', [Validators.required]),
     centerId: new FormControl('', [Validators.required])
   });
-  ngOnInit(): void {
-    this.instructorId=Number(this.route.snapshot.paramMap.get('id'));
-    this.instructorService.getById(this.instructorId).subscribe(instructor => {
-  if (instructor) {
-    this.instructorForm.patchValue({
-      ...instructor,
-      centerId: String(instructor.centerId)
-    });
-  }
-});
-  }
+ ngOnInit(): void {
+  this.instructorId = Number(this.route.snapshot.paramMap.get('id'));
+  
+  this.instructorService.getById(this.instructorId).subscribe(instructor => {
+    if (instructor) {
+      this.instructorForm.patchValue({
+        ...instructor,
+        centerId: String(instructor.centerId)
+      });
+    }
+  });
+
+  this.centerService.getAll().subscribe(centers => {
+    this.centers = centers;
+  });
+}
 onSubmit(): void {
   if (this.instructorForm.valid) {
     const formValue = {

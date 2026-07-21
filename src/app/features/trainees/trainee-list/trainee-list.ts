@@ -11,10 +11,11 @@ import { TraineeService } from '../../../core/services/trainee.service';
 import { CenterService } from '../../../core/services/center.service';
 import { FormsModule } from '@angular/forms';
 import { Center } from '../../../core/models/center.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-trainee-list',
-  imports: [MatTableModule, MatSortModule, MatPaginatorModule,FormsModule],
+  imports: [MatTableModule, MatSortModule, MatPaginatorModule, FormsModule, RouterLink],
   templateUrl: './trainee-list.html',
   styleUrl: './trainee-list.scss',
 })
@@ -24,7 +25,7 @@ export class TraineeList implements OnInit,AfterViewInit {
   centers:Center[]=[];
 @ViewChild(MatSort) sort!: MatSort;
 @ViewChild(MatPaginator) paginator!: MatPaginator;
-  displayedColumns: string[] = ['name', 'status', 'enrollDate', 'centerId'];
+  displayedColumns: string[] = ['name', 'status', 'enrollDate', 'centerId', 'actions'];
   dataSource = new MatTableDataSource<Trainee>();
   constructor(private traineeService:TraineeService,private centerService:CenterService){}
   ngOnInit(): void {

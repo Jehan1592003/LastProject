@@ -1,43 +1,65 @@
-@if (stats$ | async; as stats) {
-  <section class="dashboard-stats">
-    <div class="stat-card">
-      <span class="stat-number">{{ stats.totalInstructors }}</span>
-      <span class="stat-label">مدرّس</span>
-    </div>
+<div class="p-6">
+  <h1 class="text-3xl font-bold text-text-heading mb-6">لوحة التحكم</h1>
 
-    <div class="stat-card">
-      <span class="stat-number">{{ stats.totalTrainees }}</span>
-      <span class="stat-label">متدرب</span>
-    </div>
-
-    <div class="stat-card">
-      <span class="stat-number">{{ stats.totalCenters }}</span>
-      <span class="stat-label">مركز</span>
-    </div>
-  </section>
-}
-<section class="recent-trainees">
-  <h3>آخر المتدربين</h3>
-  @if (recentTrainees$ | async; as trainees) {
-    @for (trainee of trainees; track trainee.id) {
-      <div class="trainee-row">
-         <p>{{trainee.name}}</p>
-        <p>{{trainee.status}}</p>
-        <p>{{trainee.enrollDate}}</p>
-
+  @if (stats$ | async; as stats) {
+    <section class="dashboard-stats flex flex-wrap gap-6 mb-8">
+      <div class="stat-card bg-white border-r-4 border-primary rounded-xl shadow-sm p-6 flex items-center gap-4 flex-1 min-w-[200px]">
+        <span class="text-3xl">👨‍🏫</span>
+        <div>
+          <span class="block text-3xl font-bold text-text-heading">{{ stats.totalInstructors }}</span>
+          <span class="text-text-muted text-sm">مدرّس</span>
+        </div>
       </div>
-    }
-  }
-</section>
-<section class="recent-instructor">
-  <h3>آخر المدرسين</h3>
-  @if (recentInstructors$ | async; as instructors) {
-    @for (instructor of instructors; track instructor.id) {
-      <div class="instructor-row">
-        <p>{{instructor.name}}</p>
-        <p>{{instructor.status}}</p>
-        <p>{{instructor.hireDate}}</p>
+
+      <div class="stat-card bg-white border-r-4 border-primary rounded-xl shadow-sm p-6 flex items-center gap-4 flex-1 min-w-[200px]">
+        <span class="text-3xl">🎓</span>
+        <div>
+          <span class="block text-3xl font-bold text-text-heading">{{ stats.totalTrainees }}</span>
+          <span class="text-text-muted text-sm">متدرب</span>
+        </div>
       </div>
-    }
+
+      <div class="stat-card bg-white border-r-4 border-primary rounded-xl shadow-sm p-6 flex items-center gap-4 flex-1 min-w-[200px]">
+        <span class="text-3xl">🏢</span>
+        <div>
+          <span class="block text-3xl font-bold text-text-heading">{{ stats.totalCenters }}</span>
+          <span class="text-text-muted text-sm">مركز</span>
+        </div>
+      </div>
+    </section>
   }
-</section>
+
+  <div class="flex flex-col lg:flex-row gap-6">
+
+    <section class="recent-trainees bg-white rounded-xl shadow-sm p-6 flex-1">
+      <h3 class="text-lg font-semibold text-text-heading mb-4">آخر المتدربين</h3>
+      @if (recentTrainees$ | async; as trainees) {
+        <div class="flex flex-col gap-3">
+          @for (trainee of trainees; track trainee.id) {
+            <div class="trainee-row flex justify-between items-center border-b border-border pb-2">
+              <span class="text-text-body font-medium">{{ trainee.name }}</span>
+              <span class="text-text-muted text-sm">{{ trainee.status }}</span>
+              <span class="text-text-muted text-sm">{{ trainee.enrollDate }}</span>
+            </div>
+          }
+        </div>
+      }
+    </section>
+
+    <section class="recent-instructor bg-white rounded-xl shadow-sm p-6 flex-1">
+      <h3 class="text-lg font-semibold text-text-heading mb-4">آخر المدرّسين</h3>
+      @if (recentInstructors$ | async; as instructors) {
+        <div class="flex flex-col gap-3">
+          @for (instructor of instructors; track instructor.id) {
+            <div class="instructor-row flex justify-between items-center border-b border-border pb-2">
+              <span class="text-text-body font-medium">{{ instructor.name }}</span>
+              <span class="text-text-muted text-sm">{{ instructor.status }}</span>
+              <span class="text-text-muted text-sm">{{ instructor.hireDate }}</span>
+            </div>
+          }
+        </div>
+      }
+    </section>
+
+  </div>
+</div>

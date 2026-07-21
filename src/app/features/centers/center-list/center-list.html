@@ -1,14 +1,29 @@
-<section class="centers-grid">
+<section class="centers-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
   @for (center of centersWithCounts; track center.id) {
-    <div class="center-card">
-      <h3>{{ center.name }}</h3>
-      <p>{{ center.city }}</p>
-      <span class="badge">{{ center.status }}</span>
+    <div class="center-card bg-white border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
       
-      <div class="center-stats">
-        <span>👨‍🏫 {{ center.instructorCount }} مدرّس</span>
-        <span>🎓 {{ center.traineeCount }} متدرب</span>
+      <div class="flex justify-between items-start mb-3">
+        <h3 class="text-lg font-semibold text-text-heading">{{ center.name }}</h3>
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold"
+              [class.bg-success-light]="center.status === 'active'"
+              [class.text-success-dark]="center.status === 'active'"
+              [class.bg-error-light]="center.status === 'inactive'"
+              [class.text-error-dark]="center.status === 'inactive'">
+          {{ center.status === 'active' ? 'نشط' : 'غير نشط' }}
+        </span>
       </div>
+
+      <p class="text-text-muted text-sm mb-4">{{ center.city }}</p>
+
+      <div class="flex gap-4 pt-4 border-t border-border">
+        <span class="text-text-body text-sm flex items-center gap-1">
+          👨‍🏫 {{ center.instructorCount }} مدرّس
+        </span>
+        <span class="text-text-body text-sm flex items-center gap-1">
+          🎓 {{ center.traineeCount }} متدرب
+        </span>
+      </div>
+
     </div>
   }
 </section>
