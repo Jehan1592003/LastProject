@@ -5,10 +5,12 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Instructor } from '../../../core/models/instructor.model';
 import { CenterService } from '../../../core/services/center.service';
 import { Center } from '../../../core/models/center.model';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-instructor-detail',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './instructor-detail.html',
   styleUrl: './instructor-detail.scss',
 })

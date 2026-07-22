@@ -1,66 +1,107 @@
-<form [formGroup]="instructorForm" (ngSubmit)="onSubmit()" class="max-w-2xl mx-auto bg-white border border-border rounded-xl p-8 flex flex-col gap-4">
+<div class="max-w-2xl mx-auto p-6">
+  <div class="flex items-center justify-between mb-6">
+    <div class="flex items-center gap-3">
+      <a routerLink="/instructors" class="w-9 h-9 flex items-center justify-center rounded-lg border border-border text-text-body hover:bg-gray-50 transition-colors" >
+        <span class="text-lg">→</span>
+      </a>
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-900">بيانات المدرّس</h1>
+    </div>
 
-  <div>
-    <label for="name" class="block text-sm font-medium text-text-body mb-1.5">الاسم</label>
-    <input id="name" formControlName="name" placeholder="أحمد محمد"
-           class="w-full h-10 px-3 border border-border rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200" />
-    @if (instructorForm.get('name')?.errors?.['required'] && instructorForm.get('name')?.touched) {
-      <span class="block mt-1 text-xs text-error-dark">الاسم مطلوب</span>
-    }
+    <span
+      class="px-3 py-1 rounded-full text-xs font-semibold"
+      [ngClass]="instructorForm.value.status === 'active'
+        ? 'bg-green-100 text-green-600'
+        : 'bg-red-100 text-red-600'"
+    >
+      {{ instructorForm.value.status === 'active' ? 'نشط' : 'غير نشط' }}
+    </span>
   </div>
 
-  <div>
-    <label for="email" class="block text-sm font-medium text-text-body mb-1.5">البريد الإلكتروني</label>
-    <input id="email" formControlName="email" placeholder="example@email.com"
-           class="w-full h-10 px-3 border border-border rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200" />
-    @if (instructorForm.get('email')?.errors?.['required'] && instructorForm.get('email')?.touched) {
-      <span class="block mt-1 text-xs text-error-dark">البريد الإلكتروني مطلوب</span>
-    }
-  </div>
+  <form
+    [formGroup]="instructorForm"
+    (ngSubmit)="onSubmit()"
+    class="bg-white border border-border rounded-xl p-8"
+  >
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-5">
+      <div class="md:col-span-2">
+        <label for="name" class="block text-sm font-medium text-text-body mb-1.5">الاسم</label>
+        <input id="name" formControlName="name" placeholder="أحمد محمد"
+               class="w-full h-10 px-3 border rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200"
+               [ngClass]="(instructorForm.get('name')?.invalid && instructorForm.get('name')?.touched) ? 'border-red-600' : 'border-border'" />
+        @if (instructorForm.get('name')?.errors?.['required'] && instructorForm.get('name')?.touched) {
+          <span class="block mt-1 text-xs text-error-dark">الاسم مطلوب</span>
+        }
+        @if (instructorForm.get('name')?.errors?.['minlength'] && instructorForm.get('name')?.touched) {
+          <span class="block mt-1 text-xs text-error-dark">الاسم يجب ألا يقل عن 3 أحرف</span>
+        }
+      </div>
+      <div>
+        <label for="email" class="block text-sm font-medium text-text-body mb-1.5">البريد الإلكتروني</label>
+        <input id="email" formControlName="email" placeholder="example@email.com"
+               class="w-full h-10 px-3 border rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200"
+               [ngClass]="(instructorForm.get('email')?.invalid && instructorForm.get('email')?.touched) ? 'border-red-600' : 'border-border'" />
+        @if (instructorForm.get('email')?.errors?.['required'] && instructorForm.get('email')?.touched) {
+          <span class="block mt-1 text-xs text-error-dark">البريد الإلكتروني مطلوب</span>
+        }
+        @if (instructorForm.get('email')?.errors?.['email'] && instructorForm.get('email')?.touched) {
+          <span class="block mt-1 text-xs text-error-dark">يرجى إدخال بريد إلكتروني صحيح</span>
+        }
+      </div>
+      <div>
+        <label for="phone" class="block text-sm font-medium text-text-body mb-1.5">رقم الهاتف</label>
+        <input id="phone" formControlName="phone" placeholder="05xxxxxxxx"
+               class="w-full h-10 px-3 border rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200"
+               [ngClass]="(instructorForm.get('phone')?.invalid && instructorForm.get('phone')?.touched) ? 'border-red-600' : 'border-border'" />
+        @if (instructorForm.get('phone')?.errors?.['required'] && instructorForm.get('phone')?.touched) {
+          <span class="block mt-1 text-xs text-error-dark">رقم الهاتف مطلوب</span>
+        }
+        @if (instructorForm.get('phone')?.errors?.['pattern'] && instructorForm.get('phone')?.touched) {
+          <span class="block mt-1 text-xs text-error-dark">رقم الهاتف يجب أن يتكون من 10 أرقام</span>
+        }
+      </div>
+      <div>
+        <label for="licenseNumber" class="block text-sm font-medium text-text-body mb-1.5">رقم الرخصة</label>
+        <input id="licenseNumber" formControlName="licenseNumber" placeholder="DL-2024-001"
+               class="w-full h-10 px-3 border rounded-lg text-right font-mono focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200"
+               [ngClass]="(instructorForm.get('licenseNumber')?.invalid && instructorForm.get('licenseNumber')?.touched) ? 'border-red-600' : 'border-border'" />
+        @if (instructorForm.get('licenseNumber')?.errors?.['required'] && instructorForm.get('licenseNumber')?.touched) {
+          <span class="block mt-1 text-xs text-error-dark">رقم الرخصة مطلوب</span>
+        }
+      </div>
+      <div>
+        <label for="status" class="block text-sm font-medium text-text-body mb-1.5">الحالة</label>
+        <select id="status" formControlName="status"
+                class="w-full h-10 px-3 border border-border rounded-lg text-right bg-white focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200">
+          <option value="active">نشط</option>
+          <option value="inactive">غير نشط</option>
+        </select>
+      </div>
+      <div>
+        <label for="centerId" class="block text-sm font-medium text-text-body mb-1.5">المركز</label>
+        <select id="centerId" formControlName="centerId"
+                class="w-full h-10 px-3 border rounded-lg text-right bg-white focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200"
+                [ngClass]="(instructorForm.get('centerId')?.invalid && instructorForm.get('centerId')?.touched) ? 'border-red-600' : 'border-border'">
+          <option value="" disabled selected>اختر مركزاً</option>
+          @for (center of centers; track center.id) {
+            <option [value]="center.id">{{ center.name }}</option>
+          }
+        </select>
+        @if (instructorForm.get('centerId')?.errors?.['required'] && instructorForm.get('centerId')?.touched) {
+          <span class="block mt-1 text-xs text-error-dark">يرجى اختيار مركز</span>
+        }
+      </div>
 
-  <div>
-    <label for="phone" class="block text-sm font-medium text-text-body mb-1.5">رقم الهاتف</label>
-    <input id="phone" formControlName="phone" placeholder="05xxxxxxxx"
-           class="w-full h-10 px-3 border border-border rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200" />
-    @if (instructorForm.get('phone')?.errors?.['required'] && instructorForm.get('phone')?.touched) {
-      <span class="block mt-1 text-xs text-error-dark">رقم الهاتف مطلوب</span>
-    }
-    @if (instructorForm.get('phone')?.errors?.['pattern']) {
-      <span class="block mt-1 text-xs text-error-dark">رقم الهاتف يجب أن يتكون من 10 أرقام</span>
-    }
-  </div>
-
-  <div>
-    <label for="licenseNumber" class="block text-sm font-medium text-text-body mb-1.5">رقم الرخصة</label>
-    <input id="licenseNumber" formControlName="licenseNumber" placeholder="DL-2024-001"
-           class="w-full h-10 px-3 border border-border rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200" />
-    @if (instructorForm.get('licenseNumber')?.errors?.['required'] && instructorForm.get('licenseNumber')?.touched) {
-      <span class="block mt-1 text-xs text-error-dark">رقم الرخصة مطلوب</span>
-    }
-  </div>
-
-  <div>
-    <label for="status" class="block text-sm font-medium text-text-body mb-1.5">الحالة</label>
-    <select id="status" formControlName="status"
-            class="w-full h-10 px-3 border border-border rounded-lg text-right bg-white focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200">
-      <option value="active">نشط</option>
-      <option value="inactive">غير نشط</option>
-    </select>
-  </div>
-
-  <div>
-    <label for="centerId" class="block text-sm font-medium text-text-body mb-1.5">رقم المركز</label>
-    <select id="centerId" formControlName="centerId"
-            class="w-full h-10 px-3 border border-border rounded-lg text-right bg-white focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200">
-      @for (center of centers; track center.id) {
-        <option [value]="center.id">{{ center.name }}</option>
-      }
-    </select>
-  </div>
-
-  <button type="submit"
-          class="w-full h-10 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors duration-200 mt-2">
-    حفظ
-  </button>
-
-</form>
+    </div>
+    <div class="flex items-center justify-end gap-3 mt-8 pt-6 border-t border-border">
+      <a routerLink="/instructors"
+         class="h-10 px-4 flex items-center rounded-lg border border-border text-text-body bg-white hover:bg-gray-50 transition-colors">
+        إلغاء
+      </a>
+      <button type="submit"
+              [disabled]="instructorForm.invalid"
+              class="h-10 px-4 rounded-lg bg-primary text-white hover:bg-primary-hover transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+        حفظ
+      </button>
+    </div>
+  </form>
+</div>
