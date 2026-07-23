@@ -1,1 +1,101 @@
-<p>instructor-add works!</p>
+<div class="max-w-2xl mx-auto p-6">
+  <div class="flex items-center gap-3 mb-6">
+    <a routerLink="/instructors" class="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50 transition-colors">
+      <span class="text-lg">→</span>
+    </a>
+    <h1 class="text-2xl font-bold text-gray-900">إضافة مدرّس جديد</h1>
+  </div>
+
+  <form
+    [formGroup]="instructorForm"
+    (ngSubmit)="onSubmit()"
+    class="bg-white border border-gray-200 rounded-xl shadow-sm p-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-5">
+      <div class="flex flex-col md:col-span-2">
+        <label for="name" class="text-sm font-medium text-gray-700 mb-1.5">الاسم</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          class="h-10 px-3 rounded-lg border text-base text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          [ngClass]="instructorForm.get('name')?.invalid && instructorForm.get('name')?.touched ? 'border-red-600' : 'border-gray-300'"
+        />
+        <span *ngIf="instructorForm.get('name')?.invalid && instructorForm.get('name')?.touched" class="text-xs text-red-600 mt-1">الاسم مطلوب ويجب أن يكون 3 أحرف على الأقل</span>
+      </div>
+      <div class="flex flex-col">
+        <label for="email" class="text-sm font-medium text-gray-700 mb-1.5">البريد الإلكتروني</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          class="h-10 px-3 rounded-lg border text-base text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          [ngClass]="instructorForm.get('email')?.invalid && instructorForm.get('email')?.touched ? 'border-red-600' : 'border-gray-300'"
+        />
+        <span *ngIf="instructorForm.get('email')?.invalid && instructorForm.get('email')?.touched" class="text-xs text-red-600 mt-1">يرجى ادخال بريد الكتروني صحيح</span>
+      </div>
+      <div class="flex flex-col">
+        <label for="phone" class="text-sm font-medium text-gray-700 mb-1.5">رقم الهاتف</label>
+        <input
+          id="phone"
+          type="tel"
+          formControlName="phone"
+          class="h-10 px-3 rounded-lg border text-base text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          [ngClass]="instructorForm.get('phone')?.invalid && instructorForm.get('phone')?.touched ? 'border-red-600' : 'border-gray-300'"
+        />
+        <span *ngIf="instructorForm.get('phone')?.invalid && instructorForm.get('phone')?.touched" class="text-xs text-red-600 mt-1">يرجى ادخال رقم هاتف صحيح</span>
+      </div>
+      <div class="flex flex-col">
+        <label for="licenseNumber" class="text-sm font-medium text-gray-700 mb-1.5">رقم الرخصة</label>
+        <input
+          id="licenseNumber"
+          type="text"
+          formControlName="licenseNumber"
+          class="h-10 px-3 rounded-lg border text-base text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          [ngClass]="instructorForm.get('licenseNumber')?.invalid && instructorForm.get('licenseNumber')?.touched ? 'border-red-600' : 'border-gray-300'"
+        />
+        <span *ngIf="instructorForm.get('licenseNumber')?.invalid && instructorForm.get('licenseNumber')?.touched" class="text-xs text-red-600 mt-1">رقم الرخصة مطلوب</span>
+      </div>
+      <div class="flex flex-col">
+        <label for="centerId" class="text-sm font-medium text-gray-700 mb-1.5">المركز</label>
+        <select
+          id="centerId"
+          formControlName="centerId"
+          class="h-10 px-3 rounded-lg border text-base text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          [ngClass]="instructorForm.get('centerId')?.invalid && instructorForm.get('centerId')?.touched ? 'border-red-600' : 'border-gray-300'"
+        >
+          <option [ngValue]="null" disabled>اختر مركزاً</option>
+          <option *ngFor="let center of centers" [ngValue]="center.id">
+            {{ center.name }}
+          </option>
+        </select>
+        <span *ngIf="instructorForm.get('centerId')?.invalid && instructorForm.get('centerId')?.touched" class="text-xs text-red-600 mt-1">يرجى اختيار مركز</span>
+      </div>
+      <div class="flex flex-col">
+        <label for="status" class="text-sm font-medium text-gray-700 mb-1.5">الحالة</label>
+        <select
+          id="status"
+          formControlName="status"
+          class="h-10 px-3 rounded-lg border text-base text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          [ngClass]="instructorForm.get('status')?.invalid && instructorForm.get('status')?.touched ? 'border-red-600' : 'border-gray-300'"
+        >
+          <option value="active">نشط</option>
+          <option value="inactive">غير نشط</option>
+        </select>
+      </div>
+
+    </div>
+    <div class="flex items-center justify-end gap-3 mt-8 pt-6 border-t border-gray-200">
+      <a routerLink="/instructors"
+        class="h-10 px-4 flex items-center rounded-lg border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+        إلغاء
+      </a>
+      <button
+        type="submit"
+        [disabled]="instructorForm.invalid || isSaving"
+        class="h-10 px-4 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
+        <mat-spinner *ngIf="isSaving" diameter="16" class="!w-4 !h-4"></mat-spinner>
+        <span>{{ isSaving ? 'جاري الحفظ...' : 'حفظ' }}</span>
+      </button>
+    </div>
+  </form>
+</div>

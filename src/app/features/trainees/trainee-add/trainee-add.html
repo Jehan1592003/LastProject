@@ -1,1 +1,131 @@
-<p>trainee-add works!</p>
+<div class="max-w-2xl mx-auto p-6">
+  <div class="flex items-center gap-3 mb-6">
+    <a routerLink="/trainees" class="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50 transition-colors">
+      <span class="text-lg">→</span>
+    </a>
+    <h1 class="text-2xl font-bold text-gray-900">إضافة متدرب جديد</h1>
+  </div>
+
+  <form
+    [formGroup]="traineeForm"
+    (ngSubmit)="onSubmit()"
+    class="bg-white border border-gray-200 rounded-xl shadow-sm p-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-5">
+      <div class="flex flex-col md:col-span-2">
+        <label for="name" class="text-sm font-medium text-gray-700 mb-1.5">الاسم</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          class="h-10 px-3 rounded-lg border text-base text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          [ngClass]="traineeForm.get('name')?.invalid && traineeForm.get('name')?.touched ? 'border-red-600' : 'border-gray-300'"
+        />
+        <span *ngIf="traineeForm.get('name')?.invalid && traineeForm.get('name')?.touched" class="text-xs text-red-600 mt-1">الاسم مطلوب ويجب أن يكون 3 أحرف على الأقل</span>
+      </div>
+      <div class="flex flex-col">
+        <label for="email" class="text-sm font-medium text-gray-700 mb-1.5">البريد الإلكتروني</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          class="h-10 px-3 rounded-lg border text-base text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          [ngClass]="traineeForm.get('email')?.invalid && traineeForm.get('email')?.touched ? 'border-red-600' : 'border-gray-300'"
+        />
+        <span *ngIf="traineeForm.get('email')?.invalid && traineeForm.get('email')?.touched" class="text-xs text-red-600 mt-1">يرجى ادخال بريد الكتروني صحيح</span>
+      </div>
+      <div class="flex flex-col">
+        <label for="phone" class="text-sm font-medium text-gray-700 mb-1.5">رقم الهاتف</label>
+        <input
+          id="phone"
+          type="tel"
+          formControlName="phone"
+          class="h-10 px-3 rounded-lg border text-base text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          [ngClass]="traineeForm.get('phone')?.invalid && traineeForm.get('phone')?.touched ? 'border-red-600' : 'border-gray-300'"
+        />
+        <span *ngIf="traineeForm.get('phone')?.invalid && traineeForm.get('phone')?.touched" class="text-xs text-red-600 mt-1">يرجى ادخال رقم هاتف صحيح</span>
+      </div>
+      <div class="flex flex-col">
+        <label for="nationalId" class="text-sm font-medium text-gray-700 mb-1.5">الرقم الوطني</label>
+        <input
+          id="nationalId"
+          type="text"
+          formControlName="nationalId"
+          class="h-10 px-3 rounded-lg border font-mono text-base text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          [ngClass]="traineeForm.get('nationalId')?.invalid && traineeForm.get('nationalId')?.touched ? 'border-red-600' : 'border-gray-300'"
+        />
+        <span *ngIf="traineeForm.get('nationalId')?.hasError('required') && traineeForm.get('nationalId')?.touched" class="text-xs text-red-600 mt-1">الرقم الوطني مطلوب</span>
+        <span *ngIf="traineeForm.get('nationalId')?.hasError('nationalId') && traineeForm.get('nationalId')?.touched" class="text-xs text-red-600 mt-1">{{ traineeForm.get('nationalId')?.getError('nationalId') }}</span>
+      </div>
+      <div class="flex flex-col">
+        <label for="totalSessions" class="text-sm font-medium text-gray-700 mb-1.5">عدد الحصص الكلي</label>
+        <input
+          id="totalSessions"
+          type="number"
+          min="1"
+          max="50"
+          formControlName="totalSessions"
+          class="h-10 px-3 rounded-lg border text-base text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          [ngClass]="traineeForm.get('totalSessions')?.invalid && traineeForm.get('totalSessions')?.touched ? 'border-red-600' : 'border-gray-300'"
+        />
+        <span *ngIf="traineeForm.get('totalSessions')?.invalid && traineeForm.get('totalSessions')?.touched" class="text-xs text-red-600 mt-1">يجب أن يكون بين 1 و 50</span>
+      </div>
+      <div class="flex flex-col">
+        <label for="instructorId" class="text-sm font-medium text-gray-700 mb-1.5">المدرّس</label>
+        <select
+          id="instructorId"
+          formControlName="instructorId"
+          class="h-10 px-3 rounded-lg border text-base text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          [ngClass]="traineeForm.get('instructorId')?.invalid && traineeForm.get('instructorId')?.touched ? 'border-red-600' : 'border-gray-300'"
+        >
+          <option [ngValue]="null" disabled>اختر مدرّساً</option>
+          <option *ngFor="let instructor of instructors" [ngValue]="instructor.id">
+            {{ instructor.name }}
+          </option>
+        </select>
+        <span *ngIf="traineeForm.get('instructorId')?.invalid && traineeForm.get('instructorId')?.touched" class="text-xs text-red-600 mt-1">يرجى اختيار مدرس</span>
+      </div>
+      <div class="flex flex-col">
+        <label for="centerId" class="text-sm font-medium text-gray-700 mb-1.5">المركز</label>
+        <select
+          id="centerId"
+          formControlName="centerId"
+          class="h-10 px-3 rounded-lg border text-base text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          [ngClass]="traineeForm.get('centerId')?.invalid && traineeForm.get('centerId')?.touched ? 'border-red-600' : 'border-gray-300'"
+        >
+          <option [ngValue]="null" disabled>اختر مركزاً</option>
+          <option *ngFor="let center of centers" [ngValue]="center.id">
+            {{ center.name }}
+          </option>
+        </select>
+        <span *ngIf="traineeForm.get('centerId')?.invalid && traineeForm.get('centerId')?.touched" class="text-xs text-red-600 mt-1">يرجى اختيار مركز</span>
+      </div>
+      <div class="flex flex-col">
+        <label for="status" class="text-sm font-medium text-gray-700 mb-1.5">الحالة</label>
+        <select
+          id="status"
+          formControlName="status"
+          class="h-10 px-3 rounded-lg border text-base text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          [ngClass]="traineeForm.get('status')?.invalid && traineeForm.get('status')?.touched ? 'border-red-600' : 'border-gray-300'"
+        >
+          <option value="enrolled">قيد التدريب</option>
+          <option value="passed">ناجح</option>
+          <option value="failed">راسب</option>
+        </select>
+      </div>
+
+    </div>
+    <div class="flex items-center justify-end gap-3 mt-8 pt-6 border-t border-gray-200">
+      <a routerLink="/trainees"
+        class="h-10 px-4 flex items-center rounded-lg border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+        إلغاء
+      </a>
+      <button
+        type="submit"
+        [disabled]="traineeForm.invalid || isSaving"
+        class="h-10 px-4 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
+        <mat-spinner *ngIf="isSaving" diameter="16" class="!w-4 !h-4"></mat-spinner>
+        <span>{{ isSaving ? 'جاري الحفظ...' : 'حفظ' }}</span>
+      </button>
+    </div>
+  </form>
+</div>

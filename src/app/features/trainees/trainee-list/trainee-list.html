@@ -1,5 +1,11 @@
+  <div class="flex justify-end mb-4">
+  <a routerLink="/trainees/add"
+     class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors">
+    <span>+</span>
+    <span>إضافة متدرب</span>
+  </a>
+</div>
 <div class="bg-white border border-border rounded-xl overflow-hidden shadow-sm">
-
   <div class="p-4 border-b border-border flex flex-col sm:flex-row gap-3">
     <input [(ngModel)]="searchName" (ngModelChange)="applyFilters()" placeholder="ابحث بالاسم..." 
            class="flex-1 h-10 px-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
